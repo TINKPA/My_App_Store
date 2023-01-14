@@ -110,15 +110,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-const renderContent = () => {
-  if (authed === undefined) {
-    return <></>;
-  }
-
-  if (!authed) {
-    return <LoginForm onLoginSuccess={handleLoginSuccess} />;
-  }
-
-  return <HomePage />;
-};
-
