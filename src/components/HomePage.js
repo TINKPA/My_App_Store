@@ -11,7 +11,7 @@ import {
   Typography,
 } from "antd";
 import { useEffect, useState } from "react";
-import { searchApps, checkout } from "../utils";
+import { searchApps, checkout, deleteApp } from "../utils";
 import PostApps from "./PostApps";
 
 const { TabPane } = Tabs;
@@ -76,7 +76,7 @@ const BrowseApps = () => {
                   </Text>
                 </Tooltip>
               }
-              extra={<Text type="secondary">${item.price}</Text>}
+              extra={<Text type="secondary">${item.price/100.00}</Text>}
               actions={[
                 <Button
                   shape="round"
@@ -85,6 +85,14 @@ const BrowseApps = () => {
                 >
                   Checkout
                 </Button>,
+
+                <Button
+                shape="round"
+                type="primary"
+                onClick={() => deleteApp(item.id)}
+              >
+                Delete
+              </Button>,
               ]}
             >
               <Image src={item.url} width="100%" />

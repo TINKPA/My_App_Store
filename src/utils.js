@@ -1,4 +1,7 @@
-const domain = "https://apt-nebula-373902.uw.r.appspot.com";  // example: http://localhost:8080
+// const domain = "https://apt-nebula-373902.uw.r.appspot.com";  // example: http://localhost:8080
+import HomePage from "./components/HomePage";
+
+const domain = "http://34.171.136.202:8080";  // example: http://localhost:8080
 
 const handleResponseStatus = (response, errMsg) => {
   const { status, ok } = response;
@@ -110,3 +113,24 @@ export const checkout = (appId) => {
       window.location = redirectUrl;
     });
 };
+
+export const deleteApp = (appId) => {
+  const authToken = localStorage.getItem("authToken")
+  const url = `${domain}/app/${appId}`;
+
+  return fetch(url, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+      "Content-Type": "application/json",
+    }
+  })
+    .then((response) => {
+      handleResponseStatus(response, "Fail to delete");
+
+      return response.text();
+    })
+    .then(() => {
+      return <HomePage/>
+    })
+}
