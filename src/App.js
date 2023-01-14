@@ -62,7 +62,6 @@ const App = () => {
       >
         {renderContent()}
       </Content>
-      <LoginForm/>
     </Layout>
   );
 };
