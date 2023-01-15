@@ -7,7 +7,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-const PostApps = () => {
+const PostApps = ({onClick}) => {
   const [loading, setLoading] = useState(false);
 
   const fileInputRef = useRef(null);
@@ -19,7 +19,8 @@ const PostApps = () => {
 
     try {
       await uploadApp(data, files[0]);
-      message.success("upload successfully");
+      message.success("upload successfully")
+      onClick();
     } catch (error) {
       message.error(error.message);
     } finally {

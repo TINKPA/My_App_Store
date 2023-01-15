@@ -37,6 +37,18 @@ const BrowseApps = () => {
     }
   };
 
+  const handleDelete = async (appID) => {
+    setLoading(true);
+    try {
+      const resp = await deleteApp(appID);
+      window.location.reload();
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Form onFinish={handleSearch} layout="inline">
@@ -89,7 +101,8 @@ const BrowseApps = () => {
                 <Button
                 shape="round"
                 type="primary"
-                onClick={() => deleteApp(item.id)}
+                // onClick={() => deleteApp(item.id)}
+                onClick={() => handleDelete(item.id)}
               >
                 Delete
               </Button>,
@@ -105,16 +118,38 @@ const BrowseApps = () => {
 };
 
 const HomePage = () => {
+  const [activeTab, setActiveTab] = useState("1");
+
+  const handleTabChange = (key) => {
+    setActiveTab(key);
+  };
+
   return (
-    <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}>
+    <Tabs activeKey={activeTab} onChange={handleTabChange}>
       <TabPane tab="Browse Apps" key="1">
         <BrowseApps />
       </TabPane>
       <TabPane tab="Post Apps" key="2">
-        <PostApps />
+        <PostApps onClick={()=>handleTabChange("1")}/>
       </TabPane>
     </Tabs>
   );
 };
+
+// const HomePage = () => {
+//   return (
+//     <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}>
+//       <TabPane tab="Browse Apps" key="1">
+//         <BrowseApps />
+//       </TabPane>
+//       <TabPane tab="Post Apps" key="2">
+//         <PostApps />
+//       </TabPane>
+//     </Tabs>
+//   );
+// };
+
+// create new stat cont to new activate tab
+// pass a callback func from HomePage to PostApps to update created by line: 133
 
 export default HomePage;
