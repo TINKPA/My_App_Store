@@ -29,6 +29,7 @@ const BrowseApps = () => {
     setLoading(true);
     try {
       const resp = await searchApps(query);
+      console.log("Loading HomePages...");
       setData(resp || []);
     } catch (error) {
       message.error(error.message);
@@ -135,21 +136,5 @@ const HomePage = () => {
     </Tabs>
   );
 };
-
-// const HomePage = () => {
-//   return (
-//     <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}>
-//       <TabPane tab="Browse Apps" key="1">
-//         <BrowseApps />
-//       </TabPane>
-//       <TabPane tab="Post Apps" key="2">
-//         <PostApps />
-//       </TabPane>
-//     </Tabs>
-//   );
-// };
-
-// create new stat cont to new activate tab
-// pass a callback func from HomePage to PostApps to update created by line: 133
 
 export default HomePage;

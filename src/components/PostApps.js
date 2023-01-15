@@ -21,6 +21,7 @@ const PostApps = ({onClick}) => {
       await uploadApp(data, files[0]);
       message.success("upload successfully")
       onClick();
+      window.location.reload();
     } catch (error) {
       message.error(error.message);
     } finally {
